@@ -117,22 +117,7 @@ export class TableroComponent implements OnInit {
   }
 
   obtenerContenidoCelda(posicion: string): string {
-    const disparo = this.obtenerDisparo(posicion);
-
-    if (disparo) {
-      if (disparo.hundido) {
-        return '💥';
-      } else if (disparo.impacto) {
-        return '🔥';
-      } else {
-        return '💧';
-      }
-    }
-
-    if (this.tieneBarco(posicion) && this.mostrarBarcos) {
-      return '🚢';
-    }
-
+    // Solo cambiamos colores, no mostramos emojis
     return '';
   }
 

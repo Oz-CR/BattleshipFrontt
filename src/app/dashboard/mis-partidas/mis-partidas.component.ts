@@ -122,25 +122,11 @@ export class MisPartidasComponent implements OnInit {
   }
 
   getEstadoClasses(estado: string): string {
-    switch (estado) {
-      case 'en_curso':
-        return 'text-green-600 font-bold';
-      case 'finalizada':
-        return 'text-gray-600';
-      default:
-        return 'text-yellow-600';
-    }
+    return 'text-gray-300';
   }
 
   getResultadoClasses(resultado: string | null): string {
-    switch (resultado) {
-      case 'Ganada':
-        return 'text-green-600 font-bold';
-      case 'Perdida':
-        return 'text-red-600 font-bold';
-      default:
-        return '';
-    }
+    return 'text-gray-300';
   }
 
   getEstadoText(estado: string): string {

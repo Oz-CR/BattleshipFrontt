@@ -11,15 +11,15 @@
     <div *ngIf="mostrarInfo" class="bg-gray-700/50 px-4 py-2 rounded-lg border border-gray-600">
       <div class="flex items-center space-x-4 text-sm text-gray-300">
         <span class="flex items-center space-x-1">
-          <span class="text-blue-400">🎯</span>
+          <span class="text-gray-300">Disparos:</span>
           <span>{{ estadisticas.totalDisparos }}</span>
         </span>
         <span class="flex items-center space-x-1">
-          <span class="text-red-400">💥</span>
+          <span class="text-gray-300">Impactos:</span>
           <span>{{ estadisticas.impactos }}</span>
         </span>
         <span class="flex items-center space-x-1">
-          <span class="text-green-400">📊</span>
+          <span class="text-gray-300">Precisión:</span>
           <span>{{ estadisticas.precision }}%</span>
         </span>
       </div>
@@ -61,28 +61,6 @@
     </div>
   </div>
 
-  <div class="mt-4 flex flex-wrap gap-4 text-xs text-gray-300">
-    <div class="flex items-center gap-1">
-      <div class="w-4 h-4 bg-blue-700 border-2 border-blue-800"></div>
-      <span>🌊 Agua</span>
-    </div>
-    <div *ngIf="mostrarBarcos" class="flex items-center gap-1">
-      <div class="w-4 h-4 bg-orange-500 border-2 border-orange-600"></div>
-      <span>🚢 Barco</span>
-    </div>
-    <div class="flex items-center gap-1">
-      <div class="w-4 h-4 bg-blue-500 border-2 border-blue-600"></div>
-      <span>💧 Agua (disparado)</span>
-    </div>
-    <div class="flex items-center gap-1">
-      <div class="w-4 h-4 bg-red-500 border-2 border-red-600"></div>
-      <span>💥 Impacto</span>
-    </div>
-    <div class="flex items-center gap-1">
-      <div class="w-4 h-4 bg-red-800 border-2 border-red-900"></div>
-      <span>💀 Hundido</span>
-    </div>
-  </div>
 
   <div
     *ngIf="juegoTerminado"

@@ -24,22 +24,27 @@ export class EstadisticasGraficaComponent {
     return (this.perdidas / this.total) * 100;
   }
 
-    datos = () =>
+  datos = () =>
     [
       {
         tipo: 'ganadas',
         valor: this.ganadas,
         porcentaje: this.porcentajeGanadas,
-        clase: 'bg-green-500',
+        clase: 'bg-gradient-to-t from-green-600 to-green-400',
         etiqueta: 'Ganadas',
       },
       {
         tipo: 'perdidas',
         valor: this.perdidas,
         porcentaje: this.porcentajePerdidas,
-        clase: 'bg-red-500',
+        clase: 'bg-gradient-to-t from-red-600 to-red-400',
         etiqueta: 'Perdidas',
       },
     ] as const;
+
+  getBarHeight(porcentaje: number): number {
+    // Asegurar que la altura mínima sea 5% para visibilidad
+    return Math.max(porcentaje, 5);
+  }
 
 }

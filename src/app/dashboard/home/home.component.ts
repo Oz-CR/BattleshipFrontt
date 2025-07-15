@@ -92,6 +92,10 @@ export class HomeComponent {
     this.router.navigate(['app/mis-partidas']);
   }
 
+  navigateToPartidasDisponibles(): void {
+    this.router.navigate(['app/partidas']);
+  }
+
   isFieldInvalid(fieldName: string): boolean {
     const field = this.createGameForm.get(fieldName);
     return field ? field.invalid && (field.dirty || field.touched) : false;

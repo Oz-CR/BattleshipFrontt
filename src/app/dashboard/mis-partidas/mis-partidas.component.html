@@ -1,13 +1,37 @@
 <!-- mis-partidas.component.html -->
-<div class="authenticated-layout">
-  <header class="header">
-    <h1>Mis Partidas</h1>
-  </header>
-  
-  <div class="container">
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-orange-400">Partidas </h1>
+    </div>
+
     <!-- Loading state -->
-    <div *ngIf="loading" class="text-center py-8">
-      <div class="spinner">Cargando partidas...</div>
+    <div *ngIf="loading" class="mt-4">
+      <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded">
+        <div class="flex items-center">
+          <svg
+            class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              class="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              stroke-width="4"
+            ></circle>
+            <path
+              class="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Cargando partidas...
+        </div>
+      </div>
     </div>
 
     <!-- Error state -->
@@ -22,72 +46,82 @@
     </div>
 
     <!-- Table -->
-    <div *ngIf="!loading && !error" class="overflow-x-auto">
-      <table class="min-w-full border">
-        <thead>
-          <tr>
-            <th class="border px-4 py-2">Nombre</th>
-            <th class="border px-4 py-2">Oponente</th>
-            <th class="border px-4 py-2">Estado</th>
-            <th class="border px-4 py-2">Resultado</th>
-            <th class="border px-4 py-2">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let partida of partidas; trackBy: trackByPartidaId">
-            <td class="border px-4 py-2">{{ partida.nombre }}</td>
-            <td class="border px-4 py-2">{{ partida.oponente }}</td>
-            <td class="border px-4 py-2">
-              <span [ngClass]="getEstadoClasses(partida.estado)">
-                {{ getEstadoText(partida.estado) }}
-              </span>
-            </td>
-            <td class="border px-4 py-2">
-              <span [ngClass]="getResultadoClasses(partida.resultado)">
-                {{ partida.resultado || '-' }}
-              </span>
-            </td>
-            <td class="border px-4 py-2">
-              <button
-                *ngIf="partida.estado === 'en_curso'"
-                (click)="unirseAPartida(partida.id)"
-                class="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600 transition-colors"
-              >
-                Unirse
-              </button>
-              <button
-                *ngIf="partida.estado === 'finalizada'"
-                (click)="verDetalles(partida.id)"
-                class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition-colors"
-              >
-                Ver detalles
-              </button>
-              <span *ngIf="partida.estado === 'esperando'">-</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-      <!-- Empty state -->
-      <div *ngIf="partidas.length === 0" class="text-center py-8 text-gray-500">
-        <p>No tienes partidas registradas</p>
-        <button 
-          (click)="volverAlDashboard()" 
-          class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
-          Crear nueva partida
-        </button>
+    <div *ngIf="!loading && !error" class="mt-4">
+      <div class="overflow-hidden shadow-2xl ring-1 ring-orange-500 ring-opacity-50 md:rounded-lg">
+        <table class="min-w-full divide-y divide-orange-600">
+          <thead class="bg-gradient-to-r from-orange-600 to-red-700">
+            <tr>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Nombre
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Oponente
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Estado
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Resultado
+              </th>
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                Acción
+              </th>
+            </tr>
+          </thead>
+          <tbody class="bg-gray-800 divide-y divide-gray-700">
+            <tr *ngFor="let partida of partidas; trackBy: trackByPartidaId" class="hover:bg-gray-700 transition-colors duration-200">
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm font-medium text-gray-300">
+                  {{ partida.nombre }}
+                </div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="text-sm font-medium text-gray-300">
+                  {{ partida.oponente }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span [ngClass]="getEstadoClasses(partida.estado)">
+                  {{ getEstadoText(partida.estado) }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span [ngClass]="getResultadoClasses(partida.resultado)">
+                  {{ partida.resultado || '-' }}
+                </span>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                <div class="flex space-x-2">
+                  <button
+                    *ngIf="partida.estado === 'en_curso'"
+                    (click)="unirseAPartida(partida.id)"
+                    class="text-white bg-orange-600 hover:bg-green-500 px-3 py-1 text-sm border border-orange-500 rounded hover:shadow-lg transition-all duration-300"
+                  >
+                    Unirse
+                  </button>
+                  <button
+                    *ngIf="partida.estado === 'finalizada'"
+                    (click)="verDetalles(partida.id)"
+                    class="text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 text-sm border border-orange-500 rounded hover:shadow-lg transition-all duration-300"
+                  >
+                    Ver detalles
+                  </button>
+                  <span *ngIf="partida.estado === 'esperando'">-</span>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div *ngIf="partidas.length === 0" class="text-center py-12">
+          <svg class="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+          </svg>
+          <h3 class="mt-2 text-sm font-medium text-gray-300">No tienes partidas registradas</h3>
+          <p class="mt-1 text-sm text-gray-500">Comienza creando una nueva partida.</p>
+        </div>
       </div>
     </div>
 
-    <!-- Back button -->
-    <div class="mt-4" *ngIf="!loading">
-      <button 
-        (click)="volverAlDashboard()" 
-        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
-      >
-        Volver al Dashboard
-      </button>
-    </div>
   </div>
 </div>

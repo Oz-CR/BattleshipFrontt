@@ -1,19 +1,43 @@
-<div class="space-y-4">
-  <div
-    *ngFor="let dato of datos()"
-    class="cursor-pointer"
-    (click)="barClick.emit(dato.tipo)"
-  >
-    <div class="flex justify-between mb-1">
-      <span class="font-medium">{{ dato.etiqueta }}</span>
-      <span class="text-sm">{{ dato.valor }} ({{ dato.porcentaje.toFixed(1) }}%)</span>
+<div class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl p-6 border border-orange-500/30">
+  <h3 class="text-lg font-bold text-orange-400 mb-6 text-center">Estadísticas de Partidas</h3>
+  
+  <!-- Gráfica de barras vertical -->
+  <div class="flex items-end justify-center space-x-8 h-64">
+    <div
+      *ngFor="let dato of datos()"
+      class="flex flex-col items-center cursor-pointer transition-all duration-300 hover:scale-105"
+      (click)="barClick.emit(dato.tipo)"
+    >
+      <!-- Barra vertical -->
+      <div class="relative w-16 h-48 bg-gray-700 rounded-t-lg overflow-hidden border border-gray-600">
+        <div
+          class="absolute bottom-0 w-full transition-all duration-700 ease-out rounded-t-lg"
+          [ngStyle]="{ height: getBarHeight(dato.porcentaje) + '%' }"
+          [ngClass]="dato.clase"
+        >
+          <!-- Efecto de brillo -->
+          <div class="absolute inset-0 bg-gradient-to-t from-transparent to-white/20 rounded-t-lg"></div>
+        </div>
+        
+        <!-- Valor en la barra -->
+        <div class="absolute top-2 left-0 right-0 text-center">
+          <span class="text-white text-xs font-bold drop-shadow-lg">{{ dato.valor }}</span>
+        </div>
+      </div>
+      
+      <!-- Etiqueta y porcentaje -->
+      <div class="mt-3 text-center">
+        <div class="text-sm font-medium text-gray-300 mb-1">{{ dato.etiqueta }}</div>
+        <div class="text-xs text-gray-400">{{ dato.porcentaje.toFixed(1) }}%</div>
+      </div>
     </div>
-    <div class="w-full bg-gray-200 rounded-full h-4">
-      <div
-        class="h-4 rounded-full"
-        [ngStyle]="{ width: dato.porcentaje + '%'}"
-        [ngClass]="dato.clase"
-      ></div>
+  </div>
+  
+  <!-- Leyenda -->
+  <div class="flex justify-center items-center space-x-6 mt-6 pt-4 border-t border-gray-700">
+    <div *ngFor="let dato of datos()" class="flex items-center space-x-2">
+      <div class="w-4 h-4 rounded" [ngClass]="dato.clase"></div>
+      <span class="text-sm text-gray-300">{{ dato.etiqueta }}</span>
     </div>
   </div>
 </div>

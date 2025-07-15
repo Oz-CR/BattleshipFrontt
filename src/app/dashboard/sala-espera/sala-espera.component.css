@@ -1,0 +1,145 @@
+/* Animaciones personalizadas para el modal naval */
+@keyframes wave {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(3deg); }
+  75% { transform: rotate(-3deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes ripple {
+  0% {
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 20px rgba(6, 182, 212, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(6, 182, 212, 0);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(6, 182, 212, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(6, 182, 212, 0.8), 0 0 30px rgba(6, 182, 212, 0.6);
+  }
+}
+
+/* Clase para el efecto de oleaje */
+.wave-effect {
+  animation: wave 3s ease-in-out infinite;
+}
+
+/* Clase para el efecto de flotación */
+.float-effect {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Clase para el efecto de ondas */
+.ripple-effect {
+  animation: ripple 2s infinite;
+}
+
+/* Clase para el efecto de brillo */
+.glow-effect {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Efectos de fondo animado */
+.water-background {
+  background: linear-gradient(45deg, 
+    rgba(6, 182, 212, 0.1) 0%, 
+    rgba(59, 130, 246, 0.1) 25%, 
+    rgba(6, 182, 212, 0.1) 50%, 
+    rgba(59, 130, 246, 0.1) 75%, 
+    rgba(6, 182, 212, 0.1) 100%);
+  background-size: 400% 400%;
+  animation: gradient-shift 4s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Mejoras para el spinner */
+.naval-spinner {
+  position: relative;
+}
+
+.naval-spinner::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
+  border: 2px solid transparent;
+  border-top: 2px solid rgba(6, 182, 212, 0.3);
+  border-radius: 50%;
+  animation: spin 3s linear infinite reverse;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Efectos de hover mejorados */
+.button-naval:hover {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  transform: translateY(-2px);
+}
+
+.button-naval:active {
+  transform: translateY(0);
+}
+
+/* Efecto de partículas flotantes */
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0.6;
+  animation: float-particle 8s infinite linear;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateY(-100px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .modal-container {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+  
+  .modal-title {
+    font-size: 1.5rem;
+  }
+  
+  .progress-bar {
+    height: 0.5rem;
+  }
+}

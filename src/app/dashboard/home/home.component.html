@@ -4,7 +4,7 @@
   <header class="bg-gradient-to-r from-orange-600 to-red-700 shadow-lg">
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
       <h2 class="font-semibold text-2xl text-white leading-tight">
-        ⚓ ¡Únete a la batalla naval! ⚓
+        Unete a una batalla o crea una nueva
       </h2>
     </div>
   </header>
@@ -15,15 +15,13 @@
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         
         <div class="p-6 text-white border-b border-orange-300 font-semibold text-2xl bg-gradient-to-r from-orange-600 to-red-700">
-          ¡Bienvenido a batalla naval! 🏠
+          Bienvenido a BattleShip!
         </div>
 
         <div class="p-4 text-gray-100 bg-gray-800">
           <p class="mb-2">
-            Para comenzar, puedes crear una nueva partida o
-            unirte a una existente.
+            Crea una nueva batalla o únete a una existente.
           </p>
-          <p>¡Diviértete jugando! 🎉</p>
         </div>
 
       
@@ -31,13 +29,13 @@
           <button 
             class="bg-orange-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-lg mr-4 transition-colors duration-300 ease-in-out shadow-lg"
             (click)="openModal()">
-            🚀 Crear nueva partida
+            Crear Batalla
           </button>
 
           <button 
             class="bg-blue-600 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 ease-in-out shadow-lg"
-            (click)="navigateToPartidas()">
-            ⚓ Unirse a una partida
+            (click)="navigateToPartidasDisponibles()">
+            Unirse a la batalla
           </button>
         </div>
       </div>
@@ -48,79 +46,82 @@
   <div 
     *ngIf="showModal" 
     class="fixed inset-0 flex items-center justify-center z-50 p-4"
-    style="background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(2px);"
+    style="background-color: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);"
     (click)="closeModal()">
     
     
-    <div class="bg-white rounded-lg shadow-xl max-w-md w-full max-h-screen overflow-y-auto"
+    <div class="bg-gray-800 rounded-xl shadow-2xl max-w-md w-full max-h-screen overflow-y-auto border border-orange-500/30"
          style="animation: modalSlideIn 0.3s ease-out;"
          (click)="$event.stopPropagation()">
       
       
-      <div class="px-6 py-4 border-b border-gray-200">
-        <h3 class="text-lg font-semibold text-gray-900">
-          Crea una nueva partida
-        </h3>
+      <div class="px-6 py-4 border-b border-gray-700 bg-gradient-to-r from-orange-600 to-red-700 rounded-t-xl">
+        <div class="flex items-center space-x-3">
+          <div class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
+          <h3 class="text-xl font-bold text-white">
+            ⚔️ Crear Nueva Batalla
+          </h3>
+        </div>
       </div>
 
-      <div class="px-6 py-4">
+      <div class="px-6 py-4 bg-gray-800">
         <form [formGroup]="createGameForm" (ngSubmit)="onSubmit()">
           
           
           <div class="mb-4">
-            <label for="nombrePartida" class="block text-sm font-medium text-gray-700 mb-2">
-              Nombre de la partida
+            <label for="nombrePartida" class="block text-sm font-medium text-orange-400 mb-2">
+              🚢 Nombre de la batalla
             </label>
             <input
               type="text"
               id="nombrePartida"
               formControlName="nombre"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200"
               [class.border-red-500]="isFieldInvalid('nombre')"
               [class.focus:ring-red-500]="isFieldInvalid('nombre')"
               [class.focus:border-red-500]="isFieldInvalid('nombre')"
-              placeholder="Ingresa el nombre de la partida">
+              placeholder="Ingresa el nombre de la batalla">
             
-            <div *ngIf="isFieldInvalid('nombre')" class="mt-2 text-sm text-red-600">
+            <div *ngIf="isFieldInvalid('nombre')" class="mt-2 text-sm text-red-400">
               {{ getFieldError('nombre') }}
             </div>
           </div>
 
          
           <div class="mb-6">
-            <label for="descripcionPartida" class="block text-sm font-medium text-gray-700 mb-2">
-              Descripción
+            <label for="descripcionPartida" class="block text-sm font-medium text-orange-400 mb-2">
+              📁 Descripción de la batalla
             </label>
             <textarea
               id="descripcionPartida"
               formControlName="descripcion"
               rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 resize-none"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md shadow-sm text-white focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-colors duration-200 resize-none"
               [class.border-red-500]="isFieldInvalid('descripcion')"
               [class.focus:ring-red-500]="isFieldInvalid('descripcion')"
               [class.focus:border-red-500]="isFieldInvalid('descripcion')"
-              placeholder="Describe tu partida..."></textarea>
+              placeholder="Describe tu batalla..."></textarea>
             
-            <div *ngIf="isFieldInvalid('descripcion')" class="mt-2 text-sm text-red-600">
+            <div *ngIf="isFieldInvalid('descripcion')" class="mt-2 text-sm text-red-400">
               {{ getFieldError('descripcion') }}
             </div>
           </div>
 
-          <div class="flex justify-end space-x-3">
+          <div class="flex justify-end space-x-3 pt-4 border-t border-gray-700">
             <button
               type="button"
-              class="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200"
+              class="px-6 py-3 text-sm font-medium text-gray-300 bg-gray-600 hover:bg-gray-500 border border-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors duration-200"
               (click)="closeModal()">
-              Cancelar
+              ❌ Cancelar
             </button>
             
             <button
               type="submit"
-              class="px-4 py-2 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 border border-transparent rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200"
+              class="px-6 py-3 text-sm font-medium text-white bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 border border-transparent rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors duration-200 transform hover:scale-105"
               [disabled]="!createGameForm.valid"
               [class.opacity-50]="!createGameForm.valid"
               [class.cursor-not-allowed]="!createGameForm.valid">
-              Crear
+              ⚔️ Crear Batalla
             </button>
           </div>
         </form>
