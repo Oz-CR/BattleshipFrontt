@@ -7,28 +7,93 @@
   min-width: 32px;
 }
 
+/* Ajustar grid para casillas más compactas */
+.grid {
+  gap: 0;
+  border: 1px solid #6b7280;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Casillas del tablero más compactas */
+.grid > div {
+  border-right: 1px solid #4b5563;
+  border-bottom: 1px solid #4b5563;
+}
+
+.grid > div:nth-child(9n) {
+  border-right: none;
+}
+
+.grid > div:nth-last-child(-n+9) {
+  border-bottom: none;
+}
+
 /* Nuevos estilos para el tablero temático */
 .agua {
   background-color: #1e3a8a !important;
   color: #ffffff;
+  border-color: #1e40af !important;
 }
 
 .barco {
   background-color: #f97316 !important;
   color: #ffffff;
+  border-color: #ea580c !important;
 }
 
 .impacto {
   background-color: #dc2626 !important;
   color: #ffffff;
+  border-color: #b91c1c !important;
 }
 
 .hundido {
   background-color: #7f1d1d !important;
   color: #ffffff;
+  border-color: #991b1b !important;
 }
 
 .celda-hover:hover {
   transform: scale(1.1);
   box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+  border-color: #f97316 !important;
+}
+
+/* Estilos base para celdas */
+.tablero-celda {
+  background-color: #374151;
+  transition: all 0.3s ease;
+}
+
+.tablero-celda:hover {
+  background-color: #4b5563;
+  transform: scale(1.05);
+  z-index: 10;
+  position: relative;
+}
+
+/* Agua disparada */
+.agua-disparada {
+  background-color: #3730a3 !important;
+  color: #ffffff;
+}
+
+/* Celda vacía */
+.celda-vacia {
+  background-color: #374151;
+}
+
+.celda-vacia:hover {
+  background-color: #4b5563;
+  position: relative;
+  z-index: 10;
+}
+
+/* Remover efectos de hover para mejor integración */
+.celda-hover:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(249, 115, 22, 0.4);
+  z-index: 10;
+  position: relative;
 }
