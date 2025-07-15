@@ -1,12 +1,12 @@
 <!-- tablero.component.html -->
-<div class="bg-white rounded-lg shadow-md p-6">
+<div class="bg-gray-800 rounded-lg shadow-2xl p-6 border-2 border-orange-500">
   <div class="flex justify-between items-center mb-4">
-    <h2 class="text-xl font-semibold">
+    <h2 class="text-xl font-semibold text-orange-400">
       {{ tituloTablero }}
     </h2>
-    <div *ngIf="mostrarInfo" class="text-sm text-gray-600">
-      Disparos: {{ estadisticas.totalDisparos }} | Impactos:
-      {{ estadisticas.impactos }} | Precisión:
+    <div *ngIf="mostrarInfo" class="text-sm text-gray-300">
+      🎯 Disparos: {{ estadisticas.totalDisparos }} | 🎆 Impactos:
+      {{ estadisticas.impactos }} | 🎯 Precisión:
       {{ estadisticas.precision }}%
     </div>
   </div>

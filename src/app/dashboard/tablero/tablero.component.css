@@ -6,3 +6,29 @@
   min-height: 32px;
   min-width: 32px;
 }
+
+/* Nuevos estilos para el tablero temático */
+.agua {
+  background-color: #1e3a8a !important;
+  color: #ffffff;
+}
+
+.barco {
+  background-color: #f97316 !important;
+  color: #ffffff;
+}
+
+.impacto {
+  background-color: #dc2626 !important;
+  color: #ffffff;
+}
+
+.hundido {
+  background-color: #7f1d1d !important;
+  color: #ffffff;
+}
+
+.celda-hover:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.5);
+}

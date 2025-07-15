@@ -12,6 +12,7 @@ interface Partida {
   descripcion?: string;
 }
 
+
 interface FlashMessage {
   success?: string;
 }

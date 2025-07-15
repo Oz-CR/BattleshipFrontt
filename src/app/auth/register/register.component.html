@@ -1,9 +1,15 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-50">
-  <div class="max-w-md w-full space-y-8">
-    <div>
-      <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-        Registrarse
+<div class="min-h-screen flex items-center justify-center bg-gradient-to-br from-orange-600 to-red-800">
+  <div class="max-w-md w-full space-y-8 bg-gray-900 rounded-xl shadow-2xl p-8">
+    <div class="text-center">
+      <div class="mb-4">
+        <span class="text-6xl">🚢</span>
+      </div>
+      <h2 class="text-center text-3xl font-extrabold text-white">
+        ⚓ Reclutamiento Naval ⚓
       </h2>
+      <p class="mt-2 text-center text-sm text-gray-300">
+        Únete a la flota
+      </p>
     </div>
     <form
       class="mt-8 space-y-6"
@@ -63,15 +69,16 @@
         <button
           type="submit"
           [disabled]="!registerForm.valid || loading"
-          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-orange-600 hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 disabled:opacity-50 transition-colors duration-300"
         >
-          {{ loading ? "Registrando..." : "Registrarse" }}
+          <span class="mr-2">💪</span>
+          {{ loading ? "Registrando..." : "Alistarse" }}
         </button>
       </div>
 
       <div class="text-center">
-        <a routerLink="/login" class="text-indigo-600 hover:text-indigo-500">
-          ¿Ya tienes cuenta? Inicia sesión
+        <a routerLink="/login" class="text-orange-400 hover:text-green-400 transition-colors duration-300">
+          ¿Ya tienes cuenta? Inicia sesión ⚓
         </a>
       </div>
     </form>

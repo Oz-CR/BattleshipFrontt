@@ -1,10 +1,10 @@
 <!-- home.component.html -->
-<div class="min-h-screen bg-gray-50">
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
   
-  <header class="bg-white shadow">
+  <header class="bg-gradient-to-r from-orange-600 to-red-700 shadow-lg">
     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        Únete a la batalla naval
+      <h2 class="font-semibold text-2xl text-white leading-tight">
+        ⚓ ¡Únete a la batalla naval! ⚓
       </h2>
     </div>
   </header>
@@ -14,30 +14,30 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
       <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
         
-        <div class="p-6 text-gray-900 border-b border-gray-200 font-semibold text-2xl">
-          ¡Bienvenido a batalla naval!
+        <div class="p-6 text-white border-b border-orange-300 font-semibold text-2xl bg-gradient-to-r from-orange-600 to-red-700">
+          ¡Bienvenido a batalla naval! 🏠
         </div>
 
-        <div class="p-4 text-gray-900">
+        <div class="p-4 text-gray-100 bg-gray-800">
           <p class="mb-2">
             Para comenzar, puedes crear una nueva partida o
             unirte a una existente.
           </p>
-          <p>¡Diviértete jugando!</p>
+          <p>¡Diviértete jugando! 🎉</p>
         </div>
 
       
-        <div class="p-8 text-gray-900">
+        <div class="p-8 text-gray-900 bg-gray-800">
           <button 
-            class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-4 transition-colors duration-200 ease-in-out"
+            class="bg-orange-600 hover:bg-green-500 text-white font-bold py-3 px-6 rounded-lg mr-4 transition-colors duration-300 ease-in-out shadow-lg"
             (click)="openModal()">
-            Crear nueva partida
+            🚀 Crear nueva partida
           </button>
 
           <button 
-            class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition-colors duration-200 ease-in-out"
+            class="bg-blue-600 hover:bg-orange-500 text-white font-bold py-3 px-6 rounded-lg transition-colors duration-300 ease-in-out shadow-lg"
             (click)="navigateToPartidas()">
-            Unirse a una partida
+            ⚓ Unirse a una partida
           </button>
         </div>
       </div>

@@ -1,8 +1,8 @@
-<div class="min-h-screen bg-gray-100 py-8">
+<div class="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 py-8">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900">Partidas</h1>
-      <p class="mt-2 text-sm text-gray-600">Lista de todas las partidas disponibles</p>
+      <h1 class="text-3xl font-bold text-orange-400">🌊 Batallas Navales 🌊</h1>
+      <p class="mt-2 text-sm text-gray-300">Lista de todas las partidas disponibles</p>
     </div>
 
     <!-- Loading State -->
@@ -36,36 +36,36 @@
 
 
     <div *ngIf="!loading" class="mt-4">
-      <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-        <table class="min-w-full divide-y divide-gray-300">
-          <thead class="bg-gray-50">
+      <div class="overflow-hidden shadow-2xl ring-1 ring-orange-500 ring-opacity-50 md:rounded-lg">
+        <table class="min-w-full divide-y divide-orange-600">
+          <thead class="bg-gradient-to-r from-orange-600 to-red-700">
             <tr>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Nombre
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                🏠 Nombre
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Descripción
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                📜 Descripción
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Estado
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                📊 Estado
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Usuarios
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                👥 Usuarios
               </th>
-              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Acciones
+              <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
+                ⚙️ Acciones
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr *ngFor="let partida of partidas" class="hover:bg-gray-50">
+          <tbody class="bg-gray-800 divide-y divide-gray-700">
+            <tr *ngFor="let partida of partidas" class="hover:bg-gray-700 transition-colors duration-200">
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm font-medium text-gray-900">
+                <div class="text-sm font-medium text-gray-300">
                   {{ partida.nombre }}
                 </div>
               </td>
               <td class="px-6 py-4">
-                <div class="text-sm text-gray-900 max-w-xs truncate">
+                <div class="text-sm text-gray-300 max-w-xs truncate">
                   {{ partida.descripcion }}
                 </div>
               </td>
@@ -87,9 +87,9 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                 <div class="flex space-x-2">
-                  <button class="text-blue-600 hover:text-blue-900 px-3 py-1 text-sm border border-blue-200 rounded hover:bg-blue-50"
+                  <button class="text-white bg-orange-600 hover:bg-green-500 px-3 py-1 text-sm border border-orange-500 rounded hover:shadow-lg transition-all duration-300"
                           (click)="unirsePartida(partida)">
-                    Unirse
+                    ⚓ Unirse
                   </button>
                 </div>
               </td>
