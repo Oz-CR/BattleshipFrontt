@@ -15,15 +15,22 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   const token = authService.getToken();
 
-  
+  // Headers básicos para LocalTunnel en todas las peticiones
+  let headers: { [key: string]: string } = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Bypass-Tunnel-Reminder': 'true'
+  };
+
+  // Agregar token de autorización si existe y no es ruta de auth
   if (token && !isAuthRoute) {
-    req = req.clone({
-      setHeaders: {
-        'ngrok-skip-browser-warning': 'true',
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    headers['Authorization'] = `Bearer ${token}`;
   }
+
+  // Clonar la petición con los headers
+  req = req.clone({
+    setHeaders: headers
+  });
 
   return next(req).pipe(
     catchError((error: HttpErrorResponse) => {

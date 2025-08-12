@@ -61,6 +61,13 @@ export class authenticatedComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    this.authService.logout().subscribe({})
+    this.authService.logout().subscribe({
+      next: () => {
+        localStorage.clear();
+      },
+      error: () => {
+        localStorage.clear();
+      }
+    });
   }
 }
