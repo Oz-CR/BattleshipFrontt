@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, interval } from 'rxjs';
-import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
+import { Observable, interval, of } from 'rxjs';
+import { catchError, map, switchMap, takeUntil, startWith } from 'rxjs/operators';
 import { throwError, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
@@ -83,19 +83,39 @@ export class PartidaService {
 
   constructor(private http: HttpClient) {}
 
-  verificarEstado(partidaId: number, pollingInterval: number = 3000): Observable<EstadoPartida> {
+  verificarEstado(partidaId: number, pollingInterval: number = 2000): Observable<EstadoPartida> {
     if (!partidaId || isNaN(partidaId)) {
       return throwError(() => new Error('ID de partida inválido'));
     }
 
-    return interval(pollingInterval).pipe(
-      switchMap(() => this.http.get<EstadoPartida>(`${this.partidasUrl}/${partidaId}/verificar-estado`)),
-      takeUntil(this.stopPolling),
-      catchError((error) => {
-        console.error('Error al verificar estado:', error);
-        return throwError(() => error);
-      })
-    );
+    // Función para hacer la verificación del estado
+    const checkStatus = () => this.http
+      .get<EstadoPartida>(`${this.partidasUrl}/${partidaId}/verificar-estado`)
+      .pipe(
+        map(response => {
+          console.log('Estado actual de la partida:', response);
+          return response;
+        }),
+        catchError((error) => {
+          console.error('Error al verificar estado:', error);
+          return throwError(() => error);
+        })
+      );
+
+    // Hacer una verificación inicial y luego comenzar el polling
+    return checkStatus().pipe(
+      switchMap(initialState => {
+        // Si ya puede iniciar, retornar el estado actual
+        if (initialState.puedeIniciar) {
+          return of(initialState);
+        }
+        // Si no puede iniciar, comenzar el polling
+        return interval(pollingInterval).pipe(
+          startWith(-1), // Emite inmediatamente después de la verificación inicial
+          switchMap(() => checkStatus()),
+          takeUntil(this.stopPolling)
+        );
+      }));
   }
 
   cancelarPartida(partidaId: number): Observable<any> {
