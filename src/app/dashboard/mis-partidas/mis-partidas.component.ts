@@ -54,7 +54,7 @@ export class MisPartidasComponent implements OnInit {
               oponente: partida.oponente,
               estado: this.normalizarEstado(partida.estado),
               resultado: partida.resultado,
-              createdAt: partida.created_at, // ojo la propiedad viene con guion bajo
+              createdAt: partida.created_at,
             }));
           } else {
             this.error = 'Error al cargar las partidas filtradas';

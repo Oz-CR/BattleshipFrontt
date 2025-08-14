@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, interval } from 'rxjs';
+import { catchError, map, switchMap, takeUntil } from 'rxjs/operators';
+import { throwError, Subject } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 export interface Partida {
@@ -79,22 +79,23 @@ export interface CreatePartidaApiData {
 export class PartidaService {
   private apiUrl = environment.apiUrl; 
   private partidasUrl = `${this.apiUrl}/partidas`;
+  private stopPolling = new Subject<void>();
 
   constructor(private http: HttpClient) {}
 
-  verificarEstado(partidaId: number): Observable<EstadoPartida> {
+  verificarEstado(partidaId: number, pollingInterval: number = 3000): Observable<EstadoPartida> {
     if (!partidaId || isNaN(partidaId)) {
       return throwError(() => new Error('ID de partida inválido'));
     }
 
-    return this.http
-      .get<EstadoPartida>(`${this.partidasUrl}/${partidaId}/verificar-estado`)
-      .pipe(
-        catchError((error) => {
-          console.error('Error al verificar estado:', error);
-          return throwError(() => error);
-        })
-      );
+    return interval(pollingInterval).pipe(
+      switchMap(() => this.http.get<EstadoPartida>(`${this.partidasUrl}/${partidaId}/verificar-estado`)),
+      takeUntil(this.stopPolling),
+      catchError((error) => {
+        console.error('Error al verificar estado:', error);
+        return throwError(() => error);
+      })
+    );
   }
 
   cancelarPartida(partidaId: number): Observable<any> {
@@ -125,8 +126,9 @@ export class PartidaService {
       );
   }
 
-  getPartidas(): Observable<PartidaAPi[]> {
-    return this.http.get<IndexPartidasResponse>(this.partidasUrl).pipe(
+  getPartidas(pollingInterval: number = 3000): Observable<PartidaAPi[]> {
+    return interval(pollingInterval).pipe(
+      switchMap(() => this.http.get<IndexPartidasResponse>(this.partidasUrl)),
       map((response) => {
         if (response.success && response.data) {
           return response.data;
@@ -134,6 +136,7 @@ export class PartidaService {
           throw new Error('Respuesta de API inválida');
         }
       }),
+      takeUntil(this.stopPolling),
       catchError((error) => {
         console.error('Error al obtener partidas:', error);
         return throwError(() => error);
@@ -291,5 +294,9 @@ export class PartidaService {
         },
       }
     }));
+  }
+
+  stopAllPolling() {
+    this.stopPolling.next();
   }
 }

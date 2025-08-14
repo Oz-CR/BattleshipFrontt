@@ -17,7 +17,7 @@ export interface Partida {
   providedIn: 'root',
 })
 export class EstadisticasService {
-  private baseUrl = 'https://1efb2821f8b0.ngrok-free.app/estadisticas';
+  private baseUrl = 'https://8596e85af031fc54fd340df760c4b368.serveo.net/estadisticas';
 
     constructor(private http: HttpClient) {}
 
